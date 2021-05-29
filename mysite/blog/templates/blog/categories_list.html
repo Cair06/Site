@@ -1,0 +1,21 @@
+{% extends 'blog/base_blog.html'%}
+
+{% block title %}
+    Categories list
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-5">Категории</h1>
+{% for category in categories %}
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle mb-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      {{ category.title }}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      {% for subcategory in category.subcategories.all %}
+      <li><a class="dropdown-item" href="{{ subcategory.get_absolute_url }}">{{ subcategory.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endfor %}
+{% endblock %}

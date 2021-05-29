@@ -1,0 +1,13 @@
+{% extends 'blog/base_blog.html' %}
+
+{% block title %}
+    Subcategories list
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-5">Подкатегории:</h1>
+
+    {% for subcategory in subcategories %}
+        <h3><a href="{{ subcategory.get_absolute_url }}">{{ subcategory.title }}</a></h3>
+    {% endfor %}
+{% endblock %}

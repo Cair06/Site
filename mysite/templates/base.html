@@ -2,7 +2,7 @@
 <html>
 <head>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
 	<title>{% block title %}
 	{% endblock %}</title>
@@ -18,13 +18,13 @@
 	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	        <li class="nav-item">
-	          <a class="nav-link active" aria-current="page" href="#">Home</a>
+	          <a class="nav-link active" aria-current="page" href="{% url 'companies_list_url' %}">Компании</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="#">Link</a>
+	          <a class="nav-link" href="{% url 'categories_list_url' %}">Категории</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+	          <a class="nav-link" href="{% url 'cities_list_url' %}">Города</a>
 	        </li>
 	      </ul>
 	      <form class="d-flex">
@@ -39,9 +39,10 @@
 			<div class="col-6 offset-md-2">
 				{% block content %}
 					There is not content
-				{% endblock %}	
+				{% endblock %}
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

@@ -1,0 +1,12 @@
+{% extends 'blog/base_blog.html' %}
+
+{% block title %}
+    {{ city.title }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-5">Компании с городом - "{{ city.title }}"</h1>
+        {% for company in city.companies.all %}
+            {% include 'blog/includes/company_card_template.html' %}
+        {% endfor %}
+{% endblock %}

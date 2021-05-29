@@ -3,9 +3,10 @@
 {% block title %}
 	Index page
 {% endblock %}
+
 {% block content %}
-	<h2 class="mb-5">Posts:</h2>
-	{% for name in names %}
-		<p>{{ name }}</p>
+	<h2 class="mb-5">Компании:</h2>
+	{% for company in companies %}
+		{% include 'blog/includes/company_card_template.html' %}
 	{% endfor %}
 {% endblock %}

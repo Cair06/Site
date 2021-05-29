@@ -1,0 +1,14 @@
+{% extends 'blog/base_blog.html' %}
+
+{% block title %}
+    {{ company.title }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5">
+        {{ company.title }}
+    </h1>
+    <p>
+        {{ company.body }}
+    </p>
+{% endblock %}

@@ -1,0 +1,31 @@
+<div class="card text-dark bg-light mb-3" >
+    {% if company.is_published %}
+        <div class="card-header">{{ company.date_pub }}</div>
+    {% else %}
+        <div class="card-header">{{ company.date_pub }}(not published) </div>
+    {% endif %}
+
+  <div class="card-body">
+    <h5 class="card-title">{{ company.title }}</h5>
+    <p class="card-text">{{ company.body|truncatechars:50}}</p>
+      <a href="{{company.get_absolute_url}}" class="btn btn-dark">Read more</a>
+  </div>
+    <div class="card-footer">
+        Под-категории:
+        {% for subcategory in company.subcategory.all %}
+        {% if forloop.last %}
+            <a href="{{subcategory.get_absolute_url}}">{{ subcategory.title }}</a>.
+        {% else %}
+            <a href="{{subcategory.get_absolute_url}}">{{ subcategory.title }}</a>,
+        {% endif %}
+        {% endfor %}
+        Город:
+        {% for city in company.city.all %}
+        {% if forloop.last %}
+            <a href="{{city.get_absolute_url}}">{{ city.title }}</a>.
+        {% else %}
+            <a href="{{city.get_absolute_url}}">{{ city.title }}</a>,
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
