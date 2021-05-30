@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from .models import Company, SubCategory
-from .utils import ObjectDetailMixin, ObjectCreateMixin
+from .utils import ObjectDetailMixin, ObjectCreateMixin, ObjectUpdateMixin
 from .forms import *
 
 
@@ -36,6 +36,10 @@ class CompanyDetail(ObjectDetailMixin, View):
     model = Company
     template = 'blog/company_detail.html'
 
+class CompanyUpdate(ObjectUpdateMixin, View):
+    model = Company
+    model_form = CompanyForm
+    template = 'blog/company_update_form.html'
 
 class CityDetail(ObjectDetailMixin, View):
     model = City
@@ -57,3 +61,8 @@ class SubcategoryDetail(ObjectDetailMixin, View):
 class SubCategoryCreate(ObjectCreateMixin, View):
     model_form = SubCategoryForm
     template = 'blog/subcategory_create.html'
+
+class SubCategoryUpdate(ObjectUpdateMixin, View):
+    model= SubCategory
+    model_form = SubCategoryForm
+    template = 'blog/subcategory_update_form.html'

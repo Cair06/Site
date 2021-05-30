@@ -1,10 +1,18 @@
-<div class="card text-dark bg-light mb-3" >
+{% if company.is_published %}
+    {% with published='card border-dark mb-3' %}
+        <div class="{{ published }}" >
+    {% endwith %}
+{% else %}
+    {% with published='card border-warning mb-3' %}
+        <div class="{{ published }}" >
+    {% endwith %}
+{% endif %}
+
     {% if company.is_published %}
         <div class="card-header">{{ company.date_pub }}</div>
     {% else %}
         <div class="card-header">{{ company.date_pub }}(not published) </div>
     {% endif %}
-
   <div class="card-body">
     <h5 class="card-title">{{ company.title }}</h5>
     <p class="card-text">{{ company.body|truncatechars:50}}</p>
