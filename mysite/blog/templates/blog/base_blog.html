@@ -1,1 +1,17 @@
 {% extends 'base.html' %}
+{% block admin-panel %}
+
+<div class="btn-group">
+    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+        Создать
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'company_create_url' %}">Компанию</a></li>
+        <li><a class="dropdown-item" href="{% url 'subcategory_create_url' %}">Под-категорию</a></li>
+    </ul>
+    </div>
+    {% if detail %}
+        <a href="{{ admin_object.get_update_url }}" class="btn btn-info">Изменить</a>
+        <a href="{{ admin_object.get_delete_url }}"class="btn btn-danger">Удалить</a>
+    {% endif %}
+{% endblock %}

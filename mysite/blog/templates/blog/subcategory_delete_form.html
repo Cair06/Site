@@ -1,0 +1,13 @@
+{% extends 'blog/base_blog.html' %}
+{% block title %}
+    Delete Subcategory "{{ subcategory.title }}"
+{% endblock %}
+
+{% block content %}
+    <form action="{{ subcategory.get_delete_url }}" method="post">
+        {% csrf_token %}
+        <h3>Вы уверены что хотите удалить "{{ subcategory.title }}" подкатегорию?</h3>
+        <a href="{{ subcategory.get_absolute_url }}">Отмена</a>
+        <button type="submit" name="button" class="btn btn-danger">Удалить</button>
+    </form>
+{% endblock %}

@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from django.views.generic import View
 from .models import Company, SubCategory
-from .utils import ObjectDetailMixin, ObjectCreateMixin, ObjectUpdateMixin
+from .utils import ObjectDetailMixin, ObjectCreateMixin, ObjectUpdateMixin, ObjectDeleteMixin
 from .forms import *
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def companies_list(request):
@@ -36,7 +38,7 @@ class CompanyDetail(ObjectDetailMixin, View):
     model = Company
     template = 'blog/company_detail.html'
 
-class CompanyUpdate(ObjectUpdateMixin, View):
+class CompanyUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
     model = Company
     model_form = CompanyForm
     template = 'blog/company_update_form.html'
@@ -46,9 +48,16 @@ class CityDetail(ObjectDetailMixin, View):
     template = 'blog/city_detail.html'
 
 
-class CompanyCreate(ObjectCreateMixin, View):
+class CompanyCreate(LoginRequiredMixin, ObjectCreateMixin, View):
     model_form = CompanyForm
     template = 'blog/company_create_form.html'
+    raise_exception = True
+
+class CompanyDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
+    model = Company
+    template = 'blog/company_delete_form.html'
+    redirect_url = 'companies_list_url'
+    raise_exception = True
 
 
 class SubcategoryDetail(ObjectDetailMixin, View):
@@ -58,11 +67,19 @@ class SubcategoryDetail(ObjectDetailMixin, View):
 
 # class City
 
-class SubCategoryCreate(ObjectCreateMixin, View):
+class SubCategoryCreate(LoginRequiredMixin, ObjectCreateMixin, View):
     model_form = SubCategoryForm
     template = 'blog/subcategory_create.html'
+    raise_exception = True
 
-class SubCategoryUpdate(ObjectUpdateMixin, View):
+class SubCategoryUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
     model= SubCategory
     model_form = SubCategoryForm
     template = 'blog/subcategory_update_form.html'
+    raise_exception = True
+
+class SubcategoryDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
+    model = SubCategory
+    template = 'blog/subcategory_delete_form.html'
+    redirect_url = 'subcategories_list_url'
+    raise_exception = True

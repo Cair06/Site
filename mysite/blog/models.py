@@ -22,6 +22,9 @@ class Company(models.Model):
     def get_update_url(self):
         return reverse('company_update_url', kwargs={'pk': self.pk})
 
+    def get_delete_url(self):
+        return reverse('company_delete_url', kwargs={'pk': self.pk})
+
     def __str__(self):
         return self.title
 
@@ -70,3 +73,5 @@ class SubCategory(models.Model):
     def get_update_url(self):
         return reverse('subcategory_update_url', kwargs={'pk': self.pk})
 
+    def get_delete_url(self):
+        return reverse('subcategory_delete_url', kwargs={'pk': self.pk})
