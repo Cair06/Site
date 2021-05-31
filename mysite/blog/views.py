@@ -5,16 +5,40 @@ from .models import Company, SubCategory
 from .utils import ObjectDetailMixin, ObjectCreateMixin, ObjectUpdateMixin, ObjectDeleteMixin
 from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from  django.core.paginator import Paginator
+from django.db.models import Q
 
 def companies_list(request):
-    companies = Company.objects.all()
+    search_query = request.GET.get('search','')
+
+    if search_query:
+        companies = Company.objects.filter(Q(title__icontains=search_query) | Q(body__icontains=search_query))
+    else:
+        companies = Company.objects.all()
+
+
+    paginator = Paginator(companies, 5)
+    page_number = request.GET.get('page', 1)
+    page = paginator.get_page(page_number)
+
+
     company_is_published = "card border-dark mb-3"
     company_is_not_published = "card border-warning mb-3"
+    is_paginated = page.has_other_pages()
+    if page.has_previous():
+        prev_url = f'?page{page.previous_page_number()}'
+    else:
+        prev_url = ''
+    if page.has_next():
+        next_url = f'?page={page.next_page_number()}'
+    else:
+        next_url = ''
+
     context = {
-        'companies': companies,
-        'company_is_published': company_is_published,
-        'company_is_not_published': company_is_not_published,
+        'page_object': page,
+        'is_paginated': is_paginated,
+        'next_url': next_url,
+        'prev_url': prev_url,
     }
     return render(request, 'blog/index.html', context)
 

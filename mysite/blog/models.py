@@ -14,7 +14,7 @@ class Company(models.Model):
     class Meta:
         verbose_name = 'Компания'
         verbose_name_plural = 'Компании'
-        ordering = ['is_published']
+        ordering = ['is_published', '-date_pub']
 
     def get_absolute_url(self):
         return reverse('company_detail_url', kwargs={'pk': self.pk})
@@ -50,6 +50,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
+        ordering = ['title']
 
     def __str__(self):
         return self.title
@@ -63,6 +64,7 @@ class SubCategory(models.Model):
     class Meta:
         verbose_name = 'Под-категории'
         verbose_name_plural = 'Под-категории'
+        ordering = ['title']
 
     def __str__(self):
         return self.title

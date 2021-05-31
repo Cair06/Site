@@ -6,7 +6,7 @@
 
 {% block content %}
 	<h2 class="mb-5">Компании:</h2>
-	{% for company in companies %}
+	{% for company in page_object.object_list %}
 		{% include 'blog/includes/company_card_template.html' %}
 	{% endfor %}
 {% endblock %}
